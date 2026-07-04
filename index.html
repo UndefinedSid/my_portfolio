@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Siddharth - Developer. Portfolio showcasing interactive code terminal, backend architecture simulator, sorting visualizer, skills, and projects.">
+  <title>Siddharth — Portfolio & Developer Sandbox</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Site status bar (toast messages) -->
+  <div id="statusBar" aria-hidden="true">Interactive sandbox ready.</div>
+
+  <!-- Header -->
+  <header class="site-header" id="siteHeader">
+    <div class="container header__inner">
+      <div class="brand">
+        <h1><a class='brand__link' href='/'>Siddharth</a></h1>
+        <p class="muted">Developer • Problem solver</p>
+      </div>
+
+      <button id="navToggle" class="nav-toggle" aria-expanded="false" aria-controls="mainNav" aria-label="Toggle navigation">☰</button>
+
+      <nav id="mainNav" class="main-nav" role="navigation" aria-label="Primary navigation">
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#playground">Playground</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <div class="social-links" aria-hidden="false">
+          <a class="social" href="https://github.com/UndefinedSid" target="_blank" rel="noopener" aria-label="GitHub">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.4 7.86 10.93.58.11.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.54-3.88-1.54-.53-1.35-1.3-1.71-1.3-1.71-1.06-.72.08-.71.08-.71 1.17.08 1.78 1.2 1.78 1.2 1.04 1.78 2.73 1.27 3.4.97.11-.75.41-1.27.75-1.56-2.56-.29-5.26-1.28-5.26-5.72 0-1.26.45-2.3 1.2-3.11-.12-.3-.52-1.52.11-3.17 0 0 .97-.31 3.18 1.19.92-.26 1.9-.39 2.88-.39.98 0 1.96.13 2.88.39 2.22-1.5 3.19-1.19 3.19-1.19.64 1.65.24 2.87.12 3.17.75.81 1.2 1.85 1.2 3.11 0 4.45-2.71 5.43-5.29 5.71.42.37.79 1.1.79 2.22 0 1.6-.01 2.88-.01 3.27 0 .31.21.68.8.56C20.71 21.4 24 17.08 24 12 24 5.73 18.27.5 12 .5z"/></svg>
+          </a>
+          <a class="social" href="https://www.linkedin.com/in/sid113/" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 0h-14c-2.76 0-5 2.24-5 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5v-14c0-2.76-2.24-5-5-5zm-11.75 20h-2.5v-10h2.5v10zm-1.25-11.26c-.8 0-1.45-.66-1.45-1.47 0-.81.65-1.47 1.45-1.47s1.45.66 1.45 1.47c0 .81-.65 1.47-1.45 1.47zm13 11.26h-2.5v-5.5c0-1.31-.02-3-1.83-3-1.83 0-2.11 1.43-2.11 2.9v5.6h-2.5v-10h2.4v1.35h.03c.33-.62 1.14-1.27 2.34-1.27 2.5 0 2.96 1.65 2.96 3.8v6.12z"/></svg>
+          </a>
+          <a class="social" href="https://leetcode.com/u/sid_113/" target="_blank" rel="noopener" aria-label="LeetCode">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.483 0a1.39 1.39 0 0 0-.796.262l-10.14 7.6a1.385 1.385 0 0 0-.483 1.056c.002.34.127.669.352.923L7.75 14.8c.47.53 1.31.53 1.78 0l7.35-7.35c.48-.48.48-1.25 0-1.73l-1.3-1.3a1.22 1.22 0 0 0-.87-.36H9.863l2.84-2.84c.3-.3.3-.78 0-1.08L11.52.263A1.37 1.37 0 0 0 10.732 0h2.75zm-6.1 9.423c-.34-.34-.34-.89 0-1.23l2.45-2.45a.87.87 0 1 1 1.23 1.23L8.61 9.423a.87.87 0 0 1-1.23 0z"/></svg>
+          </a>
+        </div>
+
+        <a class="btn btn--resume" href="Siddharth_CV.pdf" download aria-label="Download resume">Resume</a>
+        <button id="themeToggle" class="btn btn--ghost" aria-pressed="false" aria-label="Toggle theme">🌙</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Split View -->
+  <section class="hero">
+    <div class="container hero__inner">
+      <div class="hero__content reveal">
+        <h2>Hi, I'm Siddharth</h2>
+        <p class="lead">I build reliable backends, solve complex algorithmic challenges, and design fault-tolerant systems.</p>
+        <div class="hero__ctas">
+          <a class="btn" href="#playground">Try the Sandbox</a>
+          <a class="btn btn--outline" href="#projects">See Projects</a>
+          <a class="btn btn--resume" href="Siddharth_CV.pdf" download>Download CV</a>
+        </div>
+      </div>
+      <div class="hero__art reveal">
+        <!-- Interactive Terminal Console -->
+        <div class="terminal-window" id="terminalWidget">
+          <div class="terminal-header">
+            <div class="terminal-dots">
+              <div class="terminal-dot terminal-dot--red"></div>
+              <div class="terminal-dot terminal-dot--yellow"></div>
+              <div class="terminal-dot terminal-dot--green"></div>
+            </div>
+            <div class="terminal-title">sid@backend-terminal:~</div>
+          </div>
+          <div class="terminal-body" id="terminalBody">
+            <div class="terminal-line">System status: <span class="terminal-output--success">ONLINE</span></div>
+            <div class="terminal-line">Welcome recruiter! Type <span class="terminal-output--success">help</span> to explore Siddharth's workspace.</div>
+            <div class="terminal-input-line">
+              <span class="terminal-prompt">sid$</span>
+              <input type="text" class="terminal-input" id="terminalInput" autofocus aria-label="Terminal input" autocomplete="off" spellcheck="false">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main class="container">
+    <!-- About Section -->
+    <section id="about" class="card reveal">
+      <h2>About Me</h2>
+      <p>Hello! I'm Siddharth, a backend developer and problem solver with a deep love for systems engineering. I enjoy algorithmic challenges, building resilient software, and optimizing system efficiency. My skillset spans C++, Java, Docker, and AWS, allowing me to take systems from design prototypes to scalable production environments.</p>
+    </section>
+
+    <!-- Playground Section (Tabs for Systems Simulator & DSA Visualizer) -->
+    <section id="playground" class="card reveal playground-section">
+      <h2>Interactive Developer Sandbox</h2>
+      <p class="playground-desc">Recruiters, explore interactive visualisations demonstrating my engineering skills. Toggle components to see system behaviours in real time.</p>
+      
+      <div class="tabs-control">
+        <button class="tab-btn active" id="tabBtnSystem" data-tab="system">System Design Sandbox</button>
+        <button class="tab-btn" id="tabBtnDsa" data-tab="dsa">DSA Sort Visualiser</button>
+      </div>
+
+      <!-- Tab 1: System Design Simulator -->
+      <div class="tab-content active" id="tabContentSystem">
+        <div class="sandbox-container">
+          <div class="sandbox-canvas">
+            <svg class="system-svg" viewBox="0 0 800 340" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Connections (Paths) -->
+              <path id="conn-client-lb" class="svg-connection" d="M 90 170 L 190 170" />
+              <path id="conn-lb-server-a" class="svg-connection" d="M 250 170 C 300 170, 300 85, 350 85" />
+              <path id="conn-lb-server-b" class="svg-connection" d="M 250 170 C 300 170, 300 255, 350 255" />
+              
+              <path id="conn-server-a-cache" class="svg-connection" d="M 430 85 L 530 85" />
+              <path id="conn-server-b-cache" class="svg-connection" d="M 430 255 C 480 255, 480 85, 530 85" />
+              
+              <path id="conn-server-a-db" class="svg-connection" d="M 430 85 C 480 85, 480 255, 530 255" />
+              <path id="conn-server-b-db" class="svg-connection" d="M 430 255 L 530 255" />
+
+              <!-- Client Node -->
+              <g id="node-client" class="svg-node">
+                <rect x="20" y="135" width="70" height="70" rx="10" fill="#1e293b" stroke="#64748b" stroke-width="2" />
+                <circle cx="55" cy="163" r="12" fill="#38bdf8" />
+                <path d="M 47 185 L 63 185" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" />
+                <text x="55" y="195" class="svg-text">Client</text>
+              </g>
+
+              <!-- Load Balancer Node -->
+              <g id="node-lb" class="svg-node">
+                <rect x="190" y="125" width="60" height="90" rx="8" fill="#1e293b" stroke="#3b82f6" stroke-width="2" />
+                <path d="M 205 155 L 235 155 M 205 185 L 235 185 M 220 145 L 220 195" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" />
+                <text x="220" y="202" class="svg-text">Nginx LB</text>
+              </g>
+
+              <!-- Server A Node -->
+              <g id="node-server-a" class="svg-node">
+                <rect x="350" y="50" width="80" height="70" rx="8" fill="#1e293b" stroke="#10b981" stroke-width="2" id="rect-server-a" />
+                <text x="390" y="80" class="svg-text">Server A</text>
+                <text x="390" y="98" class="svg-status" id="status-server-a">ONLINE</text>
+                <circle cx="390" cy="110" r="4" fill="#10b981" id="light-server-a" />
+              </g>
+
+              <!-- Server B Node -->
+              <g id="node-server-b" class="svg-node">
+                <rect x="350" y="220" width="80" height="70" rx="8" fill="#1e293b" stroke="#10b981" stroke-width="2" id="rect-server-b" />
+                <text x="390" y="250" class="svg-text">Server B</text>
+                <text x="390" y="268" class="svg-status" id="status-server-b">ONLINE</text>
+                <circle cx="390" cy="280" r="4" fill="#10b981" id="light-server-b" />
+              </g>
+
+              <!-- Redis Cache Node -->
+              <g id="node-cache" class="svg-node">
+                <rect x="530" y="50" width="80" height="70" rx="8" fill="#1e293b" stroke="#a855f7" stroke-width="2" id="rect-cache" />
+                <text x="570" y="80" class="svg-text">Redis Cache</text>
+                <text x="570" y="98" class="svg-status" id="status-cache">ENABLED</text>
+                <circle cx="570" cy="110" r="4" fill="#a855f7" id="light-cache" />
+              </g>
+
+              <!-- MySQL DB Node -->
+              <g id="node-db" class="svg-node">
+                <rect x="530" y="220" width="80" height="70" rx="8" fill="#1e293b" stroke="#f59e0b" stroke-width="2" />
+                <text x="570" y="250" class="svg-text">MySQL DB</text>
+                <text x="570" y="268" class="svg-status">DATABASE</text>
+                <circle cx="570" cy="280" r="4" fill="#f59e0b" />
+              </g>
+            </svg>
+          </div>
+          <div class="dsa-stats" id="sandboxStatPanel">
+            <span>Latency: <strong id="lblLatency">0 ms</strong></span>
+            <span>Request Routing: <strong id="lblRoute">Idle</strong></span>
+            <span>Cache Status: <strong id="lblCacheResult" style="color: var(--color-success);">HIT</strong></span>
+          </div>
+          <div class="sandbox-controls">
+            <button class="sandbox-btn" id="btnSendRequest">🚀 Send Client Request</button>
+            <button class="sandbox-btn active" id="btnToggleCache">⚡ Toggle Redis Cache</button>
+            <button class="sandbox-btn sandbox-btn--danger" id="btnCrashServerA">💥 Crash Server A</button>
+            <button class="sandbox-btn" id="btnLoadSpike">🔥 Load Spike (10 reqs)</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 2: DSA Visualizer -->
+      <div class="tab-content" id="tabContentDsa">
+        <div class="dsa-container">
+          <div class="dsa-canvas" id="dsaCanvas">
+            <!-- Array bars will be generated here by JavaScript -->
+          </div>
+          <div class="dsa-stats">
+            <span>Algorithm: <strong id="lblDsaAlgo">Bubble Sort</strong></span>
+            <span>Comparisons: <strong id="dsaComparisons">0</strong></span>
+            <span>Swaps/Writes: <strong id="dsaSwaps">0</strong></span>
+            <span>Status: <strong id="dsaAction">Idle</strong></span>
+          </div>
+          <div class="sandbox-controls" style="gap: 0.8rem;">
+            <select id="dsaAlgo" class="form__input" style="padding: 0.5rem; max-width: 160px; font-weight:600;" aria-label="Sort algorithm selector">
+              <option value="bubble">Bubble Sort</option>
+              <option value="quick">Quick Sort (Lomuto)</option>
+              <option value="selection">Selection Sort</option>
+            </select>
+            <button class="sandbox-btn" id="btnDsaRandom">🎲 Randomise</button>
+            <button class="sandbox-btn" id="btnDsaSort" style="background: var(--color-accent); color: #fff;">▶️ Sort</button>
+            <select id="dsaSpeed" class="form__input" style="padding: 0.5rem; max-width: 100px; font-weight:600;" aria-label="Sort speed selector">
+              <option value="slow">Slow</option>
+              <option value="medium" selected>Medium</option>
+              <option value="fast">Fast</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="card reveal">
+      <h2>Skills</h2>
+      <div class="tabs-control" id="skillsControls" style="justify-content: flex-start; margin-bottom: 1.5rem; flex-wrap: wrap;">
+        <button class="tab-btn active" data-filter="all">All</button>
+        <button class="tab-btn" data-filter="languages">Languages</button>
+        <button class="tab-btn" data-filter="web">Web Tech</button>
+        <button class="tab-btn" data-filter="backend">Backend & DB</button>
+        <button class="tab-btn" data-filter="core">Core Concepts</button>
+      </div>
+      <div class="skills-grid" id="skillsList">
+        <div class="skill" data-cat="languages">
+          <strong>Programming Languages</strong>
+          <div class="skill__tags">
+            <span class="skill-tag">C++</span>
+            <span class="skill-tag">Java</span>
+            <span class="skill-tag">JavaScript</span>
+            <span class="skill-tag">Python</span>
+          </div>
+        </div>
+        <div class="skill" data-cat="web">
+          <strong>Web Technologies</strong>
+          <div class="skill__tags">
+            <span class="skill-tag">HTML5</span>
+            <span class="skill-tag">CSS3</span>
+            <span class="skill-tag">React.js</span>
+            <span class="skill-tag">Web Development</span>
+          </div>
+        </div>
+        <div class="skill" data-cat="backend">
+          <strong>Backend & Databases</strong>
+          <div class="skill__tags">
+            <span class="skill-tag">API Integration</span>
+            <span class="skill-tag">MySQL</span>
+            <span class="skill-tag">Docker</span>
+            <span class="skill-tag">AWS Cloud</span>
+          </div>
+        </div>
+        <div class="skill" data-cat="core">
+          <strong>Core Concepts</strong>
+          <div class="skill__tags">
+            <span class="skill-tag">Data Structures</span>
+            <span class="skill-tag">Algorithms</span>
+            <span class="skill-tag">OOPs</span>
+            <span class="skill-tag">Computer Networks</span>
+            <span class="skill-tag">Operating Systems</span>
+          </div>
+        </div>
+        <div class="skill" data-cat="core">
+          <strong>Soft Skills & Tools</strong>
+          <div class="skill__tags">
+            <span class="skill-tag">Git</span>
+            <span class="skill-tag">Machine Learning</span>
+            <span class="skill-tag">Problem Solving</span>
+            <span class="skill-tag">Communication</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="card reveal">
+      <h2>Featured Projects</h2>
+      <div class="projects-grid" id="gallery">
+        <!-- Project One -->
+        <a aria-label='Open Project One details' class='project-card' href='#project-1' id="card-proj-1">
+          <article class="project">
+            <div class="project-svg-wrap">
+              <!-- Animated blockchain node network SVG -->
+              <svg viewBox="0 0 200 120" class="project-icon" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="100" cy="60" r="14" stroke="currentColor" stroke-width="2" />
+                <circle cx="50" cy="30" r="10" stroke="currentColor" stroke-width="1.5" />
+                <circle cx="150" cy="30" r="10" stroke="currentColor" stroke-width="1.5" />
+                <circle cx="50" cy="90" r="10" stroke="currentColor" stroke-width="1.5" />
+                <circle cx="150" cy="90" r="10" stroke="currentColor" stroke-width="1.5" />
+                <line x1="60" y1="35" x2="88" y2="52" stroke="currentColor" stroke-width="1" />
+                <line x1="140" y1="35" x2="112" y2="52" stroke="currentColor" stroke-width="1" />
+                <line x1="60" y1="85" x2="88" y2="68" stroke="currentColor" stroke-width="1" />
+                <line x1="140" y1="85" x2="112" y2="68" stroke="currentColor" stroke-width="1" />
+                <line x1="50" y1="40" x2="50" y2="80" stroke="currentColor" stroke-width="1" stroke-dasharray="2 2" />
+                <line x1="150" y1="40" x2="150" y2="80" stroke="currentColor" stroke-width="1" stroke-dasharray="2 2" />
+              </svg>
+            </div>
+            <h3>C++ Distributed Ledger</h3>
+            <p>A high-performance local blockchain node with SHA-256 block hashing, custom proof-of-work consensus, multi-threaded request queuing, and peer network synchronization.</p>
+            <div class="project-tags">
+              <span class="project-tag">C++</span>
+              <span class="project-tag">Cryptography</span>
+              <span class="project-tag">Multi-threading</span>
+              <span class="project-tag">Networking</span>
+            </div>
+          </article>
+        </a>
+        
+        <!-- Project Two -->
+        <a aria-label='Open Project Two details' class='project-card' href='#project-2' id="card-proj-2">
+          <article class="project">
+            <div class="project-svg-wrap">
+              <!-- Docker / Server stack SVG -->
+              <svg viewBox="0 0 200 120" class="project-icon" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="60" y="20" width="80" height="20" rx="4" stroke="currentColor" stroke-width="2" />
+                <rect x="60" y="50" width="80" height="20" rx="4" stroke="currentColor" stroke-width="2" />
+                <rect x="60" y="80" width="80" height="20" rx="4" stroke="currentColor" stroke-width="2" />
+                <circle cx="75" cy="30" r="3" fill="currentColor" />
+                <circle cx="75" cy="60" r="3" fill="currentColor" />
+                <circle cx="75" cy="90" r="3" fill="currentColor" />
+                <line x1="90" y1="30" x2="130" y2="30" stroke="currentColor" stroke-width="1.5" />
+                <line x1="90" y1="60" x2="130" y2="60" stroke="currentColor" stroke-width="1.5" />
+                <line x1="90" y1="90" x2="130" y2="90" stroke="currentColor" stroke-width="1.5" />
+              </svg>
+            </div>
+            <h3>Dockerized Scalable Web API</h3>
+            <p>A scalable REST API designed in Spring Boot, containerized using Docker, and load balanced with Nginx. Deployed on AWS ECS. Handles up to 5,000 requests per second with Redis cache optimization.</p>
+            <div class="project-tags">
+              <span class="project-tag">Java</span>
+              <span class="project-tag">Spring Boot</span>
+              <span class="project-tag">Docker</span>
+              <span class="project-tag">Redis</span>
+              <span class="project-tag">AWS</span>
+            </div>
+          </article>
+        </a>
+
+        <!-- Project Three -->
+        <a aria-label='Open Project Three details' class='project-card' href='#project-3' id="card-proj-3">
+          <article class="project">
+            <div class="project-svg-wrap">
+              <!-- Algorithmic graph curve SVG -->
+              <svg viewBox="0 0 200 120" class="project-icon" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M 20 100 L 50 80 L 80 90 L 110 50 L 140 70 L 180 30" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                <circle cx="110" cy="50" r="4" fill="currentColor" />
+                <circle cx="180" cy="30" r="4" fill="currentColor" />
+                <line x1="20" y1="100" x2="180" y2="100" stroke="currentColor" stroke-width="1" stroke-dasharray="4 4" />
+                <line x1="20" y1="20" x2="20" y2="100" stroke="currentColor" stroke-width="1" stroke-dasharray="4 4" />
+              </svg>
+            </div>
+            <h3>Algorithmic Strategy Backtester</h3>
+            <p>An algorithmic execution simulation environment written in Python. Evaluates moving average crossover strategies, calculates portfolio Sharpe Ratios, and identifies optimal trading signals dynamically.</p>
+            <div class="project-tags">
+              <span class="project-tag">Python</span>
+              <span class="project-tag">Algorithms</span>
+              <span class="project-tag">Data Structures</span>
+              <span class="project-tag">Simulations</span>
+            </div>
+          </article>
+        </a>
+      </div>
+      <div class="project-links-inline" style="display: none;">
+        <!-- Hidden legacy buttons needed for script.js queries -->
+        <div class="project-links-inline">
+          <a href="https://github.com/UndefinedSid" target="_blank" rel="noopener">Demo</a>
+          <a href="https://github.com/UndefinedSid" target="_blank" rel="noopener">Code</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Certifications -->
+    <section id="certifications" class="card reveal">
+      <h2>Certifications</h2>
+      <p class="muted">Selected professional certificates and courses — click View to preview, Download to save, or Verify to visit verification portals.</p>
+      <ul class="certs-list">
+        <li><strong>Deloitte Technology Job Simulation (Forage):</strong> Completed practical tasks in coding and development, gaining exposure to real-world problem-solving in a professional technology consulting environment.</li>
+        <li><strong>TATA GenAI Powered Data Analytics Job Simulation (Forage):</strong> Conducted exploratory data analysis, performed risk profiling on real-world datasets, and built AI-driven models for predictive analysis.</li>
+        <li><strong>GFG 160 Days of Problem Solving:</strong> Completed a 22-week structured program, strengthening DSA and coding skills through intensive, daily practice.</li>
+      </ul>
+
+      <div class="certs-gallery" aria-labelledby="certGalleryTitle">
+        <h3 id="certGalleryTitle" style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem;">Certificate Gallery</h3>
+        <div class="certs-grid">
+          <figure class="cert-card">
+            <img class="cert-thumb" src="img/gfg-160.jpg" alt="GFG 160 Days certificate thumbnail">
+            <figcaption>
+              <strong>GFG 160 Days of Problem Solving</strong>
+              <div class="cert-actions">
+                <button class="btn btn--small cert-view" data-src="https://media.geeksforgeeks.org/courses/certificates/0a31d26138578c5bc1b18021ae3fd11b.pdf" data-title="GFG 160 Days of Problem Solving" data-verify="https://media.geeksforgeeks.org/courses/certificates/0a31d26138578c5bc1b18021ae3fd11b.pdf">View</button>
+                <a class="btn btn--small btn--outline" href="https://media.geeksforgeeks.org/courses/certificates/0a31d26138578c5bc1b18021ae3fd11b.pdf" download target="_blank" rel="noopener">Download</a>
+                <a class="btn btn--small btn--link" href="https://media.geeksforgeeks.org/courses/certificates/0a31d26138578c5bc1b18021ae3fd11b.pdf" target="_blank" rel="noopener">Verify</a>
+              </div>
+            </figcaption>
+          </figure>
+
+          <figure class="cert-card">
+            <img class="cert-thumb" src="img/IBM_skillbuild.jpg" alt="IBM SkillBuild certificate thumbnail">
+            <figcaption>
+              <strong>IBM Web Dev SkillBuild</strong>
+              <div class="cert-actions">
+                <!-- Fallback to displaying the image if PDF not present -->
+                <button class="btn btn--small cert-view" data-src="img/IBM_skillbuild.jpg" data-title="IBM Web Dev SkillBuild">View</button>
+                <a class="btn btn--small btn--outline" href="img/IBM_skillbuild.jpg" download>Download</a>
+              </div>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- Achievements -->
+    <section id="achievements" class="card reveal">
+      <h2>Achievements</h2>
+      <ul class="achievements-list">
+        <li><strong>Naukri Campus | CodeQuezt #21 Coding Contest:</strong> Secured All-India Rank 64 out of 26,445 participants, demonstrating strong competitive programming and problem-solving abilities.</li>
+        <li><strong>LeetCode:</strong> Solved 400+ problems and earned badges for consistent daily problem solving.</li>
+      </ul>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="card reveal">
+      <h2>Contact Me</h2>
+      <form id="contactForm" action="https://formspree.io/f/yourFormID" method="POST" novalidate>
+        <label for="name">Name:</label>
+        <input class="form__input" type="text" id="name" name="name" required>
+        <div id="nameError" class="form__error" aria-live="polite"></div>
+
+        <label for="email">Email:</label>
+        <input class="form__input" type="email" id="email" name="_replyto" required>
+        <div id="emailError" class="form__error" aria-live="polite"></div>
+
+        <label for="message">Message:</label>
+        <textarea class="form__input" id="message" name="message" rows="5" required></textarea>
+        <div id="messageError" class="form__error" aria-live="polite"></div>
+
+        <div class="form__actions">
+          <button class="form__button" type="submit">Send Message</button>
+          <div id="formFeedback" class="form__feedback" aria-live="polite"></div>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; <span id="year">2026</span> Siddharth. All rights reserved.</p>
+  </footer>
+
+  <!-- Lightbox (hidden until used) -->
+  <div id="lightbox" class="lightbox" hidden>
+    <button id="lightboxClose" class="lightbox__close" aria-label="Close">✕</button>
+    <img id="lightboxImg" src="" alt="Expanded project image">
+  </div>
+
+  <!-- Project modal (opens when clicking project card) -->
+  <div id="projectModal" class="project-modal" role="dialog" aria-modal="true" aria-hidden="true" hidden>
+    <div class="project-modal__backdrop"></div>
+    <div class="project-modal__panel" role="document" aria-labelledby="projectModalTitle">
+      <button class="project-modal__close" id="projectModalClose" aria-label="Close project details">✕</button>
+      <div class="project-modal__body">
+        <div class="project-modal__media" id="projectModalMedia">
+          <img id="projectModalImg" src="" alt="Project preview" style="display: none;">
+          <!-- SVG container for rendering project modal icon dynamically -->
+          <div id="projectModalSvgContainer" style="width: 100%; height: 180px; display: flex; align-items: center; justify-content: center; background: var(--bg-secondary); border-radius: var(--radius-md); border: 1px solid var(--card-border);"></div>
+        </div>
+        <div class="project-modal__content">
+          <h3 id="projectModalTitle">Project Title</h3>
+          <p id="projectModalDesc">Short description</p>
+          <div class="project-modal__links">
+            <a id="projectModalDemo" class="btn" href="#" target="_blank" rel="noopener">Live Demo</a>
+            <a id="projectModalCode" class="btn btn--outline" href="#" target="_blank" rel="noopener">View Code</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Certificate modal (viewer) -->
+  <div id="certModal" class="project-modal cert-modal" role="dialog" aria-modal="true" aria-hidden="true" hidden>
+    <div class="project-modal__backdrop cert-modal__backdrop"></div>
+    <div class="project-modal__panel cert-modal__panel" role="document" aria-labelledby="certModalTitle">
+      <button class="project-modal__close cert-modal__close" id="certModalClose" aria-label="Close certificate viewer">✕</button>
+      <div class="project-modal__body">
+        <div class="cert-modal__content">
+          <h3 id="certModalTitle">Certificate</h3>
+          <div class="cert-embed-wrap">
+            <iframe id="certFrame" src="" title="Certificate viewer" frameborder="0" style="display: none;"></iframe>
+            <img id="certImageFallback" src="" alt="Certificate viewer image" style="width: 100%; height: 100%; object-fit: contain; display: none;">
+          </div>
+          <div class="cert-modal__meta" style="margin-top: 1rem; display: flex; gap: 0.5rem;">
+            <a id="certDownload" class="btn" href="#" download>Download</a>
+            <a id="certVerify" class="btn btn--outline" href="#" target="_blank" rel="noopener" hidden>Verify</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
