@@ -163,7 +163,6 @@ if (terminalInput && terminalBody) {
     }
   });
 
-  // Keep terminal text input focused when clicking inside the console window
   $("#terminalWidget")?.addEventListener("click", () => {
     terminalInput.focus();
   });
@@ -175,11 +174,9 @@ function appendTerminalLine(text, type = "") {
   line.className = `terminal-line ${type}`;
   line.innerHTML = text;
   
-  // Insert before the input line
   const inputLine = terminalBody.querySelector(".terminal-input-line");
   terminalBody.insertBefore(line, inputLine);
   
-  // Scroll to bottom
   terminalBody.scrollTop = terminalBody.scrollHeight;
 }
 
@@ -192,47 +189,44 @@ function handleTerminalCommand(cmd) {
   switch (cleanCmd) {
     case "help":
       appendTerminalLine(`Available commands:
-  <span class="terminal-output--success">about</span>    - Siddharth's biography
+  <span class="terminal-output--success">about</span>    - Profile summary from resume
   <span class="terminal-output--success">skills</span>   - List of technical capabilities
-  <span class="terminal-output--success">projects</span> - View engineering portfolio summary
+  <span class="terminal-output--success">projects</span> - View project repository summary
   <span class="terminal-output--success">contact</span>  - Prefill the contact form for easy message submission
   <span class="terminal-output--success">clear</span>    - Clear terminal logs`);
       break;
 
     case "about":
-      appendTerminalLine(`Siddharth is a resilient backend developer and competitive programmer with a passion for building robust backend services. High contest ranking in Naukri Campus CodeQuezt (AIR 64/26K+) and 400+ LeetCode algorithms solved.`);
+      appendTerminalLine(`Siddharth Kumar is a Software Engineer with hands-on experience in MERN stack, DevOps tooling (Docker, Kubernetes, Jenkins), and Machine learning. Solved 800+ DSA problems and built production-style projects spanning intrusion detection, real-time systems, and REST API development.`);
       break;
 
     case "skills":
       appendTerminalLine(`{
-  "languages": ["C++", "Java", "Python", "JavaScript"],
-  "backend": ["Spring Boot", "MySQL", "Docker", "Redis", "Nginx"],
-  "cloud": ["AWS (ECS, VPC, EC2)"],
-  "competencies": ["Data Structures & Algorithms", "OOPs", "Multithreading"]
+  "languages": ["C++", "JavaScript", "Python"],
+  "ai_ml": ["Scikit-learn", "NumPy", "Pandas", "Matplotlib", "Seaborn", "LangChain", "TensorFlow", "PyTorch", "FastAPI", "Streamlit"],
+  "web_backend": ["HTML5", "CSS3", "React.js", "Express.js", "Node.js", "MySQL", "MongoDB"],
+  "devops_tools": ["Git/GitHub", "Docker", "Terraform", "Kubernetes", "Linux", "Jenkins", "AWS"]
 }`, "terminal-output");
       break;
 
     case "projects":
       appendTerminalLine(`Featured Projects:
-  1. <span class="terminal-output--success">project 1</span> - C++ Distributed Ledger (Blockchain local node)
-  2. <span class="terminal-output--success">project 2</span> - Dockerized Scalable Web Service (Spring Boot + Nginx)
-  3. <span class="terminal-output--success">project 3</span> - Python Strategy Backtester
+  1. <span class="terminal-output--success">project 1</span> - Intrusion Detection System (XGBoost + Isolation Forest)
+  2. <span class="terminal-output--success">project 2</span> - Virtual Queue System (WaitWise - MERN Stack)
+Mini Projects:
+  3. <span class="terminal-output--success">Strategy Backtester</span> (Python strategy simulator)
+  4. <span class="terminal-output--success">Algorithmic Problem Solving</span> (800+ solved DSA scripts)
 Type e.g., "<span class="terminal-output--success">project 1</span>" to open its details modal!`);
       break;
 
     case "project 1":
       openProjectModalFromId("card-proj-1");
-      appendTerminalLine("Opening details for Project One...", "terminal-output--success");
+      appendTerminalLine("Opening details for Intrusion Detection System...", "terminal-output--success");
       break;
 
     case "project 2":
       openProjectModalFromId("card-proj-2");
-      appendTerminalLine("Opening details for Project Two...", "terminal-output--success");
-      break;
-
-    case "project 3":
-      openProjectModalFromId("card-proj-3");
-      appendTerminalLine("Opening details for Project Three...", "terminal-output--success");
+      appendTerminalLine("Opening details for WaitWise Virtual Queue System...", "terminal-output--success");
       break;
 
     case "contact":
@@ -261,262 +255,15 @@ function escapeHTML(str) {
 function prefillContactForm() {
   if (nameInput) nameInput.value = "Recruiter / Hiring Manager";
   if (emailInput) emailInput.value = "hiring@company.com";
-  if (messageInput) messageInput.value = "Hi Siddharth, we reviewed your interactive portfolio and liked your Backend Architecture Simulator. Let's schedule a call to discuss backend engineering opportunities!";
+  if (messageInput) messageInput.value = "Hi Siddharth, we reviewed your interactive portfolio and liked your LeetCode profile and DSA Sort Visualiser. Let's schedule a call to discuss backend engineering opportunities!";
   
-  // Save to drafts automatically
   saveFormDraft();
   
-  // Smooth scroll down to contact section
   const contactSec = document.querySelector("#contact");
   if (contactSec) {
     contactSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    pulseNode("contactForm", "var(--color-primary)");
   }
   updateStatus("Prefilled contact form. Feel free to edit and send!");
-}
-
-
-// ===== Playground Tabs Logic =====
-const tabBtns = document.querySelectorAll(".tab-btn[data-tab]");
-tabBtns.forEach(btn => {
-  btn.addEventListener("click", () => {
-    // Deactivate all
-    tabBtns.forEach(b => b.classList.remove("active"));
-    document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
-    
-    // Activate target
-    btn.classList.add("active");
-    const target = btn.dataset.tab;
-    const tabContent = document.getElementById(`tabContent${target.charAt(0).toUpperCase() + target.slice(1)}`);
-    if (tabContent) {
-      tabContent.classList.add("active");
-    }
-    
-    updateStatus(`Switched to ${btn.textContent}`);
-    
-    // Initialize array if switching to DSA Visualizer
-    if (target === "dsa" && dsaArray.length === 0) {
-      randomiseDsaArray();
-    }
-  });
-});
-
-
-// ===== System Design Simulator Logic =====
-let isCacheEnabled = true;
-let isServerACrashed = false;
-let isSimulationRunning = false;
-
-const btnSendRequest = $("#btnSendRequest");
-const btnToggleCache = $("#btnToggleCache");
-const btnCrashServerA = $("#btnCrashServerA");
-const btnLoadSpike = $("#btnLoadSpike");
-
-const lblLatency = $("#lblLatency");
-const lblRoute = $("#lblRoute");
-const lblCacheResult = $("#lblCacheResult");
-
-if (btnSendRequest) {
-  btnSendRequest.addEventListener("click", () => {
-    if (isSimulationRunning) return;
-    isSimulationRunning = true;
-    btnSendRequest.disabled = true;
-    btnLoadSpike.disabled = true;
-    runRequestSequence(() => {
-      isSimulationRunning = false;
-      btnSendRequest.disabled = false;
-      btnLoadSpike.disabled = false;
-    });
-  });
-}
-
-if (btnToggleCache) {
-  btnToggleCache.addEventListener("click", () => {
-    isCacheEnabled = !isCacheEnabled;
-    btnToggleCache.classList.toggle("active", isCacheEnabled);
-    
-    const cacheStatusText = document.getElementById("status-cache");
-    const cacheLight = document.getElementById("light-cache");
-    const cacheRect = document.getElementById("rect-cache");
-    
-    if (cacheStatusText) cacheStatusText.textContent = isCacheEnabled ? "ENABLED" : "DISABLED";
-    if (cacheLight) cacheLight.setAttribute("fill", isCacheEnabled ? "#a855f7" : "#ef4444");
-    if (cacheRect) cacheRect.setAttribute("stroke", isCacheEnabled ? "#a855f7" : "#475569");
-    
-    updateStatus(`Redis cache ${isCacheEnabled ? 'enabled (Fast Hops)' : 'disabled (Direct DB lookup)'}`);
-  });
-}
-
-if (btnCrashServerA) {
-  btnCrashServerA.addEventListener("click", () => {
-    isServerACrashed = !isServerACrashed;
-    btnCrashServerA.classList.toggle("active", isServerACrashed);
-    btnCrashServerA.textContent = isServerACrashed ? "⚡ Restore Server A" : "💥 Crash Server A";
-    
-    const serverStatusText = document.getElementById("status-server-a");
-    const serverLight = document.getElementById("light-server-a");
-    const serverRect = document.getElementById("rect-server-a");
-    
-    if (serverStatusText) serverStatusText.textContent = isServerACrashed ? "OFFLINE" : "ONLINE";
-    if (serverLight) serverLight.setAttribute("fill", isServerACrashed ? "#ef4444" : "#10b981");
-    if (serverRect) serverRect.setAttribute("stroke", isServerACrashed ? "#ef4444" : "#10b981");
-    
-    pulseNode("node-server-a", isServerACrashed ? "var(--color-danger)" : "var(--color-success)");
-    updateStatus(`Server A is now ${isServerACrashed ? 'OFFLINE' : 'ONLINE'}. Nginx will failover.`);
-  });
-}
-
-if (btnLoadSpike) {
-  btnLoadSpike.addEventListener("click", () => {
-    if (isSimulationRunning) return;
-    isSimulationRunning = true;
-    btnSendRequest.disabled = true;
-    btnLoadSpike.disabled = true;
-    
-    let count = 0;
-    const interval = setInterval(() => {
-      runRequestSequence();
-      count++;
-      if (count >= 10) {
-        clearInterval(interval);
-        setTimeout(() => {
-          isSimulationRunning = false;
-          btnSendRequest.disabled = false;
-          btnLoadSpike.disabled = false;
-        }, 1500);
-      }
-    }, 1500 / 10);
-    
-    updateStatus("Sending load spike of 10 concurrent requests...");
-  });
-}
-
-function animatePacket(pathId, duration, onComplete) {
-  const path = document.getElementById(pathId);
-  if (!path) {
-    if (onComplete) onComplete();
-    return;
-  }
-  
-  const svg = path.ownerSVGElement;
-  const pathD = path.getAttribute("d");
-  
-  const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-  circle.setAttribute("r", "5");
-  circle.setAttribute("fill", "var(--color-accent)");
-  circle.style.filter = "drop-shadow(0 0 3px var(--color-accent))";
-  
-  const anim = document.createElementNS("http://www.w3.org/2000/svg", "animateMotion");
-  anim.setAttribute("dur", `${duration}ms`);
-  anim.setAttribute("repeatCount", "1");
-  anim.setAttribute("fill", "freeze");
-  anim.setAttribute("path", pathD);
-  
-  circle.appendChild(anim);
-  svg.appendChild(circle);
-  
-  // Begin the motion animation
-  anim.beginElement();
-  
-  setTimeout(() => {
-    circle.remove();
-    if (onComplete) onComplete();
-  }, duration);
-}
-
-function pulseNode(nodeId, color) {
-  const g = document.getElementById(nodeId);
-  if (!g) return;
-  const target = g.querySelector("rect") || g.querySelector("circle");
-  if (!target) return;
-  
-  const originalStroke = target.getAttribute("stroke");
-  const originalWidth = target.getAttribute("stroke-width") || "2";
-  
-  target.setAttribute("stroke", color);
-  target.setAttribute("stroke-width", "4");
-  
-  setTimeout(() => {
-    target.setAttribute("stroke", originalStroke);
-    target.setAttribute("stroke-width", originalWidth);
-  }, 400);
-}
-
-function runRequestSequence(callback) {
-  const selectedServer = isServerACrashed ? "b" : "a";
-  const hasCache = isCacheEnabled;
-  
-  if (lblRoute) lblRoute.textContent = "Routing Request...";
-  
-  // Connection line active state
-  document.getElementById("conn-client-lb")?.classList.add("active");
-  
-  // Hop 1: Client to LB
-  animatePacket("conn-client-lb", 350, () => {
-    document.getElementById("conn-client-lb")?.classList.remove("active");
-    pulseNode("node-lb", "var(--color-accent)");
-    
-    if (lblRoute) lblRoute.textContent = `Nginx ➔ Server ${selectedServer.toUpperCase()}`;
-    document.getElementById(`conn-lb-server-${selectedServer}`)?.classList.add("active");
-    
-    // Hop 2: LB to Server
-    animatePacket(`conn-lb-server-${selectedServer}`, 350, () => {
-      document.getElementById(`conn-lb-server-${selectedServer}`)?.classList.remove("active");
-      pulseNode(`node-server-${selectedServer}`, "var(--color-success)");
-      
-      // Hop 3: Check cache
-      if (hasCache) {
-        if (lblCacheResult) {
-          lblCacheResult.textContent = "HIT";
-          lblCacheResult.style.color = "var(--color-success)";
-        }
-        
-        const hitLatency = Math.floor(Math.random() * 4) + 4; // 4-7ms
-        if (lblLatency) lblLatency.textContent = `${hitLatency} ms`;
-        
-        document.getElementById(`conn-server-${selectedServer}-cache`)?.classList.add("active");
-        
-        animatePacket(`conn-server-${selectedServer}-cache`, 200, () => {
-          document.getElementById(`conn-server-${selectedServer}-cache`)?.classList.remove("active");
-          pulseNode("node-cache", "#a855f7");
-          
-          if (lblRoute) lblRoute.textContent = "Done (Cache Hit)";
-          pulseNode("node-client", "var(--color-success)");
-          
-          if (callback) callback();
-        });
-      } else {
-        if (lblCacheResult) {
-          lblCacheResult.textContent = "MISS";
-          lblCacheResult.style.color = "var(--color-danger)";
-        }
-        
-        document.getElementById(`conn-server-${selectedServer}-cache`)?.classList.add("active");
-        
-        // Cache misses check Cache first, then go to Database
-        animatePacket(`conn-server-${selectedServer}-cache`, 200, () => {
-          document.getElementById(`conn-server-${selectedServer}-cache`)?.classList.remove("active");
-          pulseNode("node-cache", "var(--color-danger)");
-          
-          if (lblRoute) lblRoute.textContent = `Server ${selectedServer.toUpperCase()} ➔ MySQL DB`;
-          document.getElementById(`conn-server-${selectedServer}-db`)?.classList.add("active");
-          
-          // Hop 4: Server to Database
-          animatePacket(`conn-server-${selectedServer}-db`, 450, () => {
-            document.getElementById(`conn-server-${selectedServer}-db`)?.classList.remove("active");
-            pulseNode("node-db", "#f59e0b");
-            
-            const dbLatency = Math.floor(Math.random() * 40) + 120; // 120-160ms
-            if (lblLatency) lblLatency.textContent = `${dbLatency} ms`;
-            if (lblRoute) lblRoute.textContent = "Done (DB Query)";
-            pulseNode("node-client", "var(--color-success)");
-            
-            if (callback) callback();
-          });
-        });
-      }
-    });
-  });
 }
 
 
@@ -525,7 +272,6 @@ let dsaArray = [];
 let comparisonsCount = 0;
 let swapsCount = 0;
 let isSorting = false;
-let sortingAbortController = null;
 
 const dsaCanvas = $("#dsaCanvas");
 const dsaAlgoSelect = $("#dsaAlgo");
@@ -549,9 +295,8 @@ function randomiseDsaArray() {
   swapsCount = 0;
   updateDsaStats("Idle");
   
-  const size = 20; // fixed size for visual layout
+  const size = 20; // responsive design wraps and shrinks bars automatically
   for (let i = 0; i < size; i++) {
-    // Generate height percentage values from 12% to 95%
     dsaArray.push(Math.floor(Math.random() * 83) + 12);
   }
   
@@ -615,7 +360,7 @@ if (btnDsaSort) {
         updateDsaStats("Sorted! ✅");
       }
     } catch (e) {
-      console.log("Sorting execution interrupted", e);
+      console.log("Sorting interrupted", e);
     } finally {
       isSorting = false;
       btnDsaSort.textContent = "▶️ Sort";
@@ -631,7 +376,7 @@ function getDsaDelay() {
   const speed = dsaSpeedSelect ? dsaSpeedSelect.value : "medium";
   if (speed === "slow") return 220;
   if (speed === "fast") return 20;
-  return 85; // medium default
+  return 85;
 }
 
 function stopSorting() {
@@ -663,7 +408,6 @@ async function runBubbleSort(arr) {
       await sleep(getDsaDelay());
       
       if (arr[j] > arr[j + 1]) {
-        // Swap values
         let temp = arr[j];
         arr[j] = arr[j + 1];
         arr[j + 1] = temp;
@@ -749,7 +493,7 @@ async function runQuickSort(arr, low, high) {
 async function partitionQuickSort(arr, low, high) {
   const bars = dsaCanvas.querySelectorAll(".dsa-bar");
   const pivot = arr[high];
-  bars[high].classList.add("comparing"); // Highlight pivot node
+  bars[high].classList.add("comparing");
   
   let i = low - 1;
   for (let j = low; j < high; j++) {
@@ -799,7 +543,7 @@ async function partitionQuickSort(arr, low, high) {
 }
 
 
-// ===== Skills filter logic =====
+// ===== Skills Filter Logic =====
 function filterSkills(category) {
   const items = skillsList ? skillsList.querySelectorAll(".skill") : [];
   items.forEach((item) => {
@@ -815,7 +559,6 @@ if (skillsControls) {
     const btn = e.target.closest("button[data-filter]");
     if (!btn) return;
     
-    // Toggle active class
     skillsControls.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
     btn.classList.add("active");
     
@@ -873,25 +616,20 @@ function openProjectModalFromCard(card) {
   const title = card.querySelector('.project h3')?.textContent || 'Project';
   const desc = card.querySelector('.project p')?.textContent || '';
   
-  // Clone the project icon SVG into the modal
   const svgWrap = card.querySelector('.project-svg-wrap');
   if (svgWrap && projectModalSvgContainer) {
     projectModalSvgContainer.innerHTML = svgWrap.innerHTML;
   }
   
-  // Bind appropriate source code urls dynamically based on the project id
-  let demoHref = "#playground";
+  let demoHref = "https://github.com/UndefinedSid";
   let codeHref = "https://github.com/UndefinedSid";
   
   if (card.id === 'card-proj-1') {
-    demoHref = "#playground";
-    codeHref = "https://github.com/UndefinedSid/Distributed-Ledger-Cpp";
+    demoHref = "https://github.com/UndefinedSid/Intrusion-Detection-System";
+    codeHref = "https://github.com/UndefinedSid/Intrusion-Detection-System";
   } else if (card.id === 'card-proj-2') {
-    demoHref = "#playground";
-    codeHref = "https://github.com/UndefinedSid/Scalable-API-Java";
-  } else if (card.id === 'card-proj-3') {
-    demoHref = "#playground";
-    codeHref = "https://github.com/UndefinedSid/Strategy-Backtester-Python";
+    demoHref = "https://github.com/UndefinedSid/WaitWise";
+    codeHref = "https://github.com/UndefinedSid/WaitWise";
   }
 
   if (projectModalTitle) projectModalTitle.textContent = title;
@@ -950,7 +688,7 @@ projectModal?.addEventListener('click', (e) => {
 });
 
 
-// ===== Certificate modal logic =====
+// ===== Certificate Modal Logic =====
 const certModal = document.getElementById('certModal');
 const certModalClose = document.getElementById('certModalClose');
 const certFrame = document.getElementById('certFrame');
@@ -973,7 +711,6 @@ function openCertModal(src, title = '', verify = '') {
       certImageFallback.style.display = "none";
     }
   } else {
-    // If it's a thumbnail image fallback
     if (certImageFallback) {
       certImageFallback.src = src;
       certImageFallback.style.display = "block";
@@ -1109,7 +846,7 @@ function applyTheme(theme) {
 }
 
 function initTheme() {
-  const saved = localStorage.getItem(LS_KEYS.theme) || "dark"; // Default to dark mode for hacker aesthetic
+  const saved = localStorage.getItem(LS_KEYS.theme) || "dark";
   applyTheme(saved);
 }
 
@@ -1211,7 +948,6 @@ if (contactForm) {
 
 
 // ===== Initialize Playground Elements =====
-// Initialize first array visualization
 randomiseDsaArray();
 
 updateStatus('Developer Console and Sandbox initialized.', 1500);
