@@ -29,6 +29,8 @@
           <li><a href="#playground">DSA Visualiser</a></li>
           <li><a href="#projects">Projects</a></li>
           <li><a href="#contact">Contact</a></li>
+          <!-- Mobile-only resume navigation item -->
+          <li><a class="mobile-resume-nav" href="Siddharth_CV.pdf" download>Resume</a></li>
         </ul>
       </nav>
 
@@ -45,7 +47,7 @@
           </a>
         </div>
 
-        <a class="btn btn--resume" href="Siddharth_CV.pdf" download aria-label="Download resume">Resume</a>
+        <a class="btn btn--resume header-resume-btn" href="Siddharth_CV.pdf" download aria-label="Download resume">Resume</a>
         <button id="themeToggle" class="btn btn--ghost" aria-pressed="false" aria-label="Toggle theme">🌙</button>
       </div>
     </div>
@@ -91,7 +93,14 @@
     <!-- About Section -->
     <section id="about" class="card reveal">
       <h2>About Me</h2>
-      <p>I'm Siddharth Kumar, a Software Engineer with hands-on experience building full-stack MERN web applications, managing cloud and container deployments (Docker, Kubernetes, Jenkins), and designing Machine Learning pipelines. I possess a strong problem-solving profile, having solved 800+ Data Structures & Algorithms (DSA) problems. I focus on developing reliable backends, writing low-latency algorithms, and resolving high-throughput architectural bottlenecks.</p>
+      <div class="about-wrapper">
+        <div class="profile-avatar-wrap">
+          <img src="img/Sid_profile.jpg" alt="Siddharth Kumar profile picture" class="profile-avatar">
+        </div>
+        <div class="about-text">
+          <p>I'm Siddharth Kumar, a Software Engineer with hands-on experience building full-stack MERN web applications, managing cloud and container deployments (Docker, Kubernetes, Jenkins), and designing Machine Learning pipelines. I possess a strong problem-solving profile, having solved 800+ Data Structures & Algorithms (DSA) problems. I focus on developing reliable backends, writing low-latency algorithms, and resolving high-throughput architectural bottlenecks.</p>
+        </div>
+      </div>
     </section>
 
     <!-- Experience & Internships Section -->
@@ -186,15 +195,15 @@
           <span>Swaps/Writes: <strong id="dsaSwaps">0</strong></span>
           <span>Status: <strong id="dsaAction">Idle</strong></span>
         </div>
-        <div class="sandbox-controls" style="gap: 0.8rem;">
-          <select id="dsaAlgo" class="form__input" style="padding: 0.5rem; max-width: 160px; font-weight:600;" aria-label="Sort algorithm selector">
+        <div class="sandbox-controls">
+          <select id="dsaAlgo" class="form__input" style="padding: 0.5rem; font-weight:600;" aria-label="Sort algorithm selector">
             <option value="bubble">Bubble Sort</option>
             <option value="quick">Quick Sort (Lomuto)</option>
             <option value="selection">Selection Sort</option>
           </select>
           <button class="sandbox-btn" id="btnDsaRandom">🎲 Randomise</button>
           <button class="sandbox-btn" id="btnDsaSort" style="background: var(--color-primary); color: #fff;">▶️ Sort</button>
-          <select id="dsaSpeed" class="form__input" style="padding: 0.5rem; max-width: 100px; font-weight:600;" aria-label="Sort speed selector">
+          <select id="dsaSpeed" class="form__input" style="padding: 0.5rem; font-weight:600;" aria-label="Sort speed selector">
             <option value="slow">Slow</option>
             <option value="medium" selected>Medium</option>
             <option value="fast">Fast</option>
@@ -396,8 +405,9 @@
             <figcaption>
               <strong>DevOps Internship (Vaidsys)</strong>
               <div class="cert-actions">
-                <button class="btn btn--small cert-view" data-src="img/gfg-160.jpg" data-title="DevOps Internship Certificate">View</button>
-                <a class="btn btn--small btn--outline" href="img/gfg-160.jpg" download>Download</a>
+                <button class="btn btn--small cert-view" data-src="img/Vaidsys_Internship.pdf" data-title="DevOps Internship Certificate">View</button>
+                <a class="btn btn--small btn--outline" href="img/Vaidsys_Internship.pdf" download>Download</a>
+                <a class="btn btn--small btn--link" href="mailto:info@vaidsys.com?subject=Verification%20of%20Siddharth%20Kumar%20Internship" target="_blank" rel="noopener">Verify</a>
               </div>
             </figcaption>
           </figure>
@@ -433,9 +443,9 @@
             <figcaption>
               <strong>HackerRank Problem Solving</strong>
               <div class="cert-actions">
-                <button class="btn btn--small cert-view" data-src="img/gfg-160.jpg" data-title="HackerRank Problem Solving (Intermediate)">View</button>
-                <a class="btn btn--small btn--outline" href="img/gfg-160.jpg" download>Download</a>
-                <a class="btn btn--small btn--link" href="https://www.hackerrank.com/certificates/ea84dd9908cf" target="_blank" rel="noopener">Verify</a>
+                <button class="btn btn--small cert-view" data-src="img/HackerRank_ProblemSolving.pdf" data-title="HackerRank Problem Solving (Intermediate)">View</button>
+                <a class="btn btn--small btn--outline" href="img/HackerRank_ProblemSolving.pdf" download>Download</a>
+                <a class="btn btn--small btn--link" href="https://www.hackerrank.com/certificates/A333E3DD8988" target="_blank" rel="noopener">Verify</a>
               </div>
             </figcaption>
           </figure>
