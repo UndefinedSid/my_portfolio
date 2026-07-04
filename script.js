@@ -85,8 +85,8 @@ function updateStatus(message, ms = 2000) {
   statusBar.style.display = 'block';
   statusBar.setAttribute('aria-hidden', 'false');
   clearTimeout(updateStatus._t);
-  updateStatus._t = setTimeout(() => { 
-    statusBar.style.display = 'none'; 
+  updateStatus._t = setTimeout(() => {
+    statusBar.style.display = 'none';
     statusBar.setAttribute('aria-hidden', 'true');
   }, ms);
 }
@@ -173,10 +173,10 @@ function appendTerminalLine(text, type = "") {
   const line = document.createElement("div");
   line.className = `terminal-line ${type}`;
   line.innerHTML = text;
-  
+
   const inputLine = terminalBody.querySelector(".terminal-input-line");
   terminalBody.insertBefore(line, inputLine);
-  
+
   terminalBody.scrollTop = terminalBody.scrollHeight;
 }
 
@@ -247,7 +247,7 @@ Type e.g., "<span class="terminal-output--success">project 1</span>" to open its
 }
 
 function escapeHTML(str) {
-  return str.replace(/[&<>'"]/g, 
+  return str.replace(/[&<>'"]/g,
     tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
   );
 }
@@ -256,9 +256,9 @@ function prefillContactForm() {
   if (nameInput) nameInput.value = "Recruiter / Hiring Manager";
   if (emailInput) emailInput.value = "hiring@company.com";
   if (messageInput) messageInput.value = "Hi Siddharth, we reviewed your interactive portfolio and liked your LeetCode profile and DSA Sort Visualiser. Let's schedule a call to discuss backend engineering opportunities!";
-  
+
   saveFormDraft();
-  
+
   const contactSec = document.querySelector("#contact");
   if (contactSec) {
     contactSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -289,24 +289,24 @@ function randomiseDsaArray() {
   if (isSorting) {
     stopSorting();
   }
-  
+
   dsaArray = [];
   comparisonsCount = 0;
   swapsCount = 0;
   updateDsaStats("Idle");
-  
+
   const size = 20; // responsive design wraps and shrinks bars automatically
   for (let i = 0; i < size; i++) {
     dsaArray.push(Math.floor(Math.random() * 83) + 12);
   }
-  
+
   renderDsaArray();
 }
 
 function renderDsaArray() {
   if (!dsaCanvas) return;
   dsaCanvas.innerHTML = "";
-  
+
   dsaArray.forEach(val => {
     const bar = document.createElement("div");
     bar.className = "dsa-bar";
@@ -331,21 +331,21 @@ if (btnDsaSort) {
       stopSorting();
       return;
     }
-    
+
     isSorting = true;
     btnDsaSort.textContent = "⏹️ Stop";
     btnDsaRandom.disabled = true;
     if (dsaAlgoSelect) dsaAlgoSelect.disabled = true;
-    
+
     comparisonsCount = 0;
     swapsCount = 0;
     updateDsaStats("Sorting...");
-    
+
     const algo = dsaAlgoSelect ? dsaAlgoSelect.value : "bubble";
     if (lblDsaAlgo) {
       lblDsaAlgo.textContent = algo === "bubble" ? "Bubble Sort" : algo === "quick" ? "Quick Sort" : "Selection Sort";
     }
-    
+
     try {
       if (algo === "bubble") {
         await runBubbleSort(dsaArray);
@@ -354,7 +354,7 @@ if (btnDsaSort) {
       } else if (algo === "quick") {
         await runQuickSort(dsaArray, 0, dsaArray.length - 1);
       }
-      
+
       if (isSorting) {
         await animateSortedWave();
         updateDsaStats("Sorted! ✅");
@@ -400,31 +400,31 @@ async function runBubbleSort(arr) {
   for (let i = 0; i < n - 1; i++) {
     for (let j = 0; j < n - i - 1; j++) {
       if (!isSorting) throw new Error("Abort");
-      
+
       bars[j].classList.add("comparing");
       bars[j + 1].classList.add("comparing");
       comparisonsCount++;
       updateDsaStats();
       await sleep(getDsaDelay());
-      
+
       if (arr[j] > arr[j + 1]) {
         let temp = arr[j];
         arr[j] = arr[j + 1];
         arr[j + 1] = temp;
-        
+
         bars[j].style.height = `${arr[j]}%`;
         bars[j + 1].style.height = `${arr[j + 1]}%`;
-        
+
         bars[j].classList.add("swapping");
         bars[j + 1].classList.add("swapping");
         swapsCount++;
         updateDsaStats();
         await sleep(getDsaDelay());
-        
+
         bars[j].classList.remove("swapping");
         bars[j + 1].classList.remove("swapping");
       }
-      
+
       bars[j].classList.remove("comparing");
       bars[j + 1].classList.remove("comparing");
     }
@@ -440,15 +440,15 @@ async function runSelectionSort(arr) {
   for (let i = 0; i < n; i++) {
     let minIdx = i;
     bars[i].classList.add("comparing");
-    
+
     for (let j = i + 1; j < n; j++) {
       if (!isSorting) throw new Error("Abort");
-      
+
       bars[j].classList.add("comparing");
       comparisonsCount++;
       updateDsaStats();
       await sleep(getDsaDelay());
-      
+
       if (arr[j] < arr[minIdx]) {
         if (minIdx !== i) bars[minIdx].classList.remove("swapping");
         minIdx = j;
@@ -457,19 +457,19 @@ async function runSelectionSort(arr) {
         bars[j].classList.remove("comparing");
       }
     }
-    
+
     if (minIdx !== i) {
       let temp = arr[i];
       arr[i] = arr[minIdx];
       arr[minIdx] = temp;
-      
+
       bars[i].style.height = `${arr[i]}%`;
       bars[minIdx].style.height = `${arr[minIdx]}%`;
-      
+
       swapsCount++;
       updateDsaStats();
       await sleep(getDsaDelay());
-      
+
       bars[minIdx].classList.remove("swapping");
     }
     bars[i].classList.remove("comparing");
@@ -494,51 +494,51 @@ async function partitionQuickSort(arr, low, high) {
   const bars = dsaCanvas.querySelectorAll(".dsa-bar");
   const pivot = arr[high];
   bars[high].classList.add("comparing");
-  
+
   let i = low - 1;
   for (let j = low; j < high; j++) {
     if (!isSorting) throw new Error("Abort");
-    
+
     bars[j].classList.add("comparing");
     comparisonsCount++;
     updateDsaStats();
     await sleep(getDsaDelay());
-    
+
     if (arr[j] < pivot) {
       i++;
       let temp = arr[i];
       arr[i] = arr[j];
       arr[j] = temp;
-      
+
       bars[i].style.height = `${arr[i]}%`;
       bars[j].style.height = `${arr[j]}%`;
-      
+
       bars[i].classList.add("swapping");
       bars[j].classList.add("swapping");
       swapsCount++;
       updateDsaStats();
       await sleep(getDsaDelay());
-      
+
       bars[i].classList.remove("swapping");
       bars[j].classList.remove("swapping");
     }
     bars[j].classList.remove("comparing");
   }
-  
+
   let temp = arr[i + 1];
   arr[i + 1] = arr[high];
   arr[high] = temp;
-  
+
   bars[i + 1].style.height = `${arr[i + 1]}%`;
   bars[high].style.height = `${arr[high]}%`;
-  
+
   bars[i + 1].classList.add("sorted");
   bars[high].classList.remove("comparing");
-  
+
   swapsCount++;
   updateDsaStats();
   await sleep(getDsaDelay());
-  
+
   return i + 1;
 }
 
@@ -558,10 +558,10 @@ if (skillsControls) {
   skillsControls.addEventListener("click", (e) => {
     const btn = e.target.closest("button[data-filter]");
     if (!btn) return;
-    
+
     skillsControls.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
     btn.classList.add("active");
-    
+
     const cat = btn.getAttribute("data-filter");
     filterSkills(cat);
   });
@@ -615,15 +615,15 @@ function openProjectModalFromId(cardId) {
 function openProjectModalFromCard(card) {
   const title = card.querySelector('.project h3')?.textContent || 'Project';
   const desc = card.querySelector('.project p')?.textContent || '';
-  
+
   const svgWrap = card.querySelector('.project-svg-wrap');
   if (svgWrap && projectModalSvgContainer) {
     projectModalSvgContainer.innerHTML = svgWrap.innerHTML;
   }
-  
+
   let demoHref = "https://github.com/UndefinedSid";
   let codeHref = "https://github.com/UndefinedSid";
-  
+
   if (card.id === 'card-proj-1') {
     demoHref = "https://github.com/UndefinedSid/Intrusion-Detection-System";
     codeHref = "https://github.com/UndefinedSid/Intrusion-Detection-System";
@@ -683,8 +683,8 @@ function onModalKeyDown(e) {
 }
 
 projectModalClose?.addEventListener('click', closeProjectModal);
-projectModal?.addEventListener('click', (e) => { 
-  if (e.target.classList.contains('project-modal__backdrop')) closeProjectModal(); 
+projectModal?.addEventListener('click', (e) => {
+  if (e.target.classList.contains('project-modal__backdrop')) closeProjectModal();
 });
 
 
@@ -699,9 +699,9 @@ const certVerify = document.getElementById('certVerify');
 
 function openCertModal(src, title = '', verify = '') {
   if (!certModal) return;
-  
+
   const isPdf = src.toLowerCase().endsWith(".pdf");
-  
+
   if (isPdf) {
     if (certFrame) {
       certFrame.src = src;
@@ -720,19 +720,19 @@ function openCertModal(src, title = '', verify = '') {
       certFrame.style.display = "none";
     }
   }
-  
+
   if (certModalTitle) certModalTitle.textContent = title || 'Certificate';
   if (certDownload) certDownload.href = src;
-  
-  if (verify) { 
+
+  if (verify) {
     if (certVerify) {
-      certVerify.href = verify; 
-      certVerify.hidden = false; 
+      certVerify.href = verify;
+      certVerify.hidden = false;
     }
-  } else { 
+  } else {
     if (certVerify) {
-      certVerify.hidden = true; 
-      certVerify.href = '#'; 
+      certVerify.hidden = true;
+      certVerify.href = '#';
     }
   }
 
@@ -741,7 +741,7 @@ function openCertModal(src, title = '', verify = '') {
 
   _lastFocused = document.activeElement;
   if (certModalClose) certModalClose.focus();
-  
+
   document.addEventListener('focus', trapCertFocus, true);
   document.addEventListener('keydown', onCertKeyDown);
   updateStatus(`Opening certificate: ${title}`);
@@ -784,8 +784,8 @@ function onCertKeyDown(e) {
 
 if (certModalClose) certModalClose.addEventListener('click', closeCertModal);
 if (certModal) {
-  certModal.addEventListener('click', (e) => { 
-    if (e.target.classList.contains('project-modal__backdrop')) closeCertModal(); 
+  certModal.addEventListener('click', (e) => {
+    if (e.target.classList.contains('project-modal__backdrop')) closeCertModal();
   });
 }
 
@@ -901,14 +901,26 @@ if (messageInput) messageInput.addEventListener("input", debounce(() => validate
 
 if (contactForm) {
   contactForm.addEventListener("submit", (e) => {
+    e.preventDefault(); // Intercept default form submit redirects (prevents Formspree ID error)
     formFeedback.textContent = "";
     if (!validateForm()) {
-      e.preventDefault();
       setText(formFeedback, "Please fix the errors above before submitting.");
       formFeedback.style.color = "var(--color-danger)";
       updateStatus("Form submission blocked: validation errors.");
     } else {
-      updateStatus("Form submitted. Thank you!");
+      const nameVal = nameInput?.value || "";
+      const emailVal = emailInput?.value || "";
+      const msgVal = messageInput?.value || "";
+
+      const subject = encodeURIComponent(`Portfolio message from ${nameVal}`);
+      const body = encodeURIComponent(`Name: ${nameVal}\nEmail: ${emailVal}\n\nMessage:\n${msgVal}`);
+
+      // Redirect to native mail application prefilled
+      window.location.href = `mailto:iamsid0654@gmail.com?subject=${subject}&body=${body}`;
+
+      setText(formFeedback, "Opening your local mail app to send the message. Thank you!");
+      formFeedback.style.color = "var(--color-success)";
+      updateStatus("Form submitted! Opening mail app.");
       localStorage.removeItem(LS_KEYS.formDraft);
     }
   });

@@ -1364,6 +1364,17 @@ footer {
   .dsa-bar {
     border-radius: 2px 2px 0 0;
   }
+  .dsa-stats {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    text-align: center;
+    font-size: 0.8rem;
+  }
+  .projects-grid,
+  .mini-projects-grid {
+    grid-template-columns: 1fr !important;
+  }
   .sandbox-controls {
     display: grid !important;
     grid-template-columns: 1fr 1fr;
